@@ -1,14 +1,15 @@
-import { InputState } from "./inputHandler.js"
-
 export class Particle {
     maxVectorLength = 100;
     isSimulated = false;
+
+    isVectorVisible = false;
+    vectorScale = 0;
 
     constructor(position, velocity, mass, color) {
         this.position = position;
         this.velocity = velocity;
         this.mass = mass;
-        this.radius = 10 * Math.sqrt(mass);
+        this.radius = 10 * Math.cbrt(mass);
         this.color = color;
     }
 
@@ -29,11 +30,11 @@ export class Particle {
         ctx.fillStyle = this.color;
         ctx.fill();
         
-        if (!InputState.isVectorsVisible) return;
+        if (!this.isVectorVisible) return;
         
         //Draw Vector Line
-        const vectorTipX = this.position.x + this.maxVectorLength * InputState.vectorScale * this.velocity.x;
-        const vectorTipY = this.position.y + this.maxVectorLength * InputState.vectorScale * this.velocity.y;
+        const vectorTipX = this.position.x + this.maxVectorLength * this.vectorScale * this.velocity.x;
+        const vectorTipY = this.position.y + this.maxVectorLength * this.vectorScale * this.velocity.y;
 
         ctx.beginPath();
         ctx.moveTo(this.position.x, this.position.y);
@@ -41,8 +42,8 @@ export class Particle {
         ctx.stroke();
 
         //Draw Vector Arrow
-        const arrowLength = 15 * InputState.vectorScale;
-        const arrowWidth = 5 * InputState.vectorScale;
+        const arrowLength = 15 * this.vectorScale;
+        const arrowWidth = 5 * this.vectorScale;
         const arrowTipX = vectorTipX + this.velocity.x * arrowLength;
         const arrowTipY = vectorTipY + this.velocity.y * arrowLength;
 

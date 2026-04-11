@@ -37,7 +37,12 @@ function loop()
 
     //Rendering
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {p.draw(ctx, InputState.isVectorsVisible, InputState.vectorScale)});
+    particles.forEach(p => 
+        {
+            p.vectorScale = InputState.vectorScale;
+            p.isVectorVisible = InputState.isVectorsVisible;
+            p.draw(ctx, InputState.isVectorsVisible, InputState.vectorScale)
+        });
 
     if (InputState.isPaused)
     {
