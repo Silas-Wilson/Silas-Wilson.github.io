@@ -5,11 +5,11 @@ export class Particle {
     isVectorVisible = false;
     vectorScale = 0;
 
-    constructor(position, velocity, mass, color) {
+    constructor(position, velocity, mass, radius, color) {
         this.position = position;
         this.velocity = velocity;
         this.mass = mass;
-        this.radius = 10 * Math.cbrt(mass);
+        this.radius = radius;
         this.color = color;
     }
 
@@ -48,10 +48,12 @@ export class Particle {
         const arrowTipY = vectorTipY + this.velocity.y * arrowLength;
 
         ctx.beginPath();
-        ctx.lineTo(vectorTipX + arrowWidth * this.velocity.y, vectorTipY + -arrowWidth * this.velocity.x);
-        ctx.lineTo(arrowTipX , arrowTipY);
-        ctx.lineTo(vectorTipX + -arrowWidth * this.velocity.y, vectorTipY + arrowWidth * this.velocity.x);
-        ctx.lineTo(vectorTipX + arrowWidth * this.velocity.y, vectorTipY + -arrowWidth * this.velocity.x);
-        ctx.stroke();
+        ctx.moveTo(vectorTipX + this.velocity.x * arrowLength, vectorTipY + this.velocity.y * arrowLength);
+        ctx.lineTo(vectorTipX + arrowWidth * this.velocity.y, vectorTipY - arrowWidth * this.velocity.x);
+        ctx.lineTo(vectorTipX - arrowWidth * this.velocity.y, vectorTipY + arrowWidth * this.velocity.x);
+        ctx.closePath();
+
+        ctx.fillStyle = "black"; // or "black"
+        ctx.fill();
     }
 }

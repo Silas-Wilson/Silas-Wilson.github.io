@@ -7,12 +7,12 @@ canvas.style.background = "rgb(255, 255, 255)"
 const ctx = canvas.getContext("2d");
 
 canvas.width = 800;
-canvas.height = 600;
+canvas.height = 700;
 
 let particles = []
 function spawnParticle(spawnPosition, spawnVelocity, mass)
 {
-    particles.push(new Particle(spawnPosition, spawnVelocity, mass, "rgb(187, 0, 0)"))
+    particles.push(new Particle(spawnPosition, spawnVelocity, mass, 10 * Math.cbrt(mass), "rgb(187, 0, 0)"))
 }
 
 const maxGravity = 0.2;

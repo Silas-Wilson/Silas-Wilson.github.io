@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Collisions</title>
+  <title>Particle Collisions</title>
+  <link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
   <h1>Particle Collisions</h1>
   <p>Click and drag to spawn particles and give velocity</p>
+
   <!-- CANVAS -->
   <div>
     <canvas id="canvas"></canvas>
   </div>
 
   <!-- SETTINGS / VISIBLE INPUT -->
-  <div>
+  <div id = "inputs">
     <label>
       <input type="checkbox" id="togglePause">
       Pause
@@ -28,7 +30,7 @@
   </div>
   
   <!-- SIMULATION INPUT -->
-  <div>
+  <div id = "inputs">
     <label>
       <input type="range" id="gravityStrength", min="0", max="1", step="0.01">
       Gravity Strength
@@ -39,16 +41,11 @@
     </label>
   </div>
 
+  
+
   <!-- MAIN SCRIPT -->
-  <script type="module" src="script.js"></script>
+    <script type="module" src="script.js"></script>
   <!-- INPUT SCRIPT -->
   <script type="module" src="inputHandler.js"></script>
 </body>
 </html>
-
-<!--CSS STUFF-->
-<style>
-  canvas {
-    border: 2px solid black;
-  }
-</style>

@@ -1,31 +1,33 @@
-import { Vector2 } from "../collisions/vector.js";
 import { Particle } from "../collisions/particle.js";
+import { Presets } from "./presets.js";
 
 const canvas = document.getElementById("canvas");
-canvas.style.background = "rgb(255, 255, 255)"
+canvas.style.background = "rgb(0, 0, 0)"
 const ctx = canvas.getContext("2d");
 
-const width = 800;
-const height = 800;
-const screenCenter = new Vector2(width / 2, height / 2);
+export const width = 1500;
+export const height = 1500;
 
 canvas.width = width;
 canvas.height = height;
 
-const G = 70;
+const G = 1;
 
 let planets = []
-function spawnPlanet(spawnPosition, spawnVelocity, mass)
+function spawnPlanet(spawnPosition, spawnVelocity, mass, radius, color = "rgb(108, 164, 255)")
 {
-    planets.push(new Particle(spawnPosition, spawnVelocity, mass, "rgb(187, 0, 0)"))
+    planets.push(new Particle(spawnPosition, spawnVelocity, mass, radius, color))
 }
 
-spawnPlanet(screenCenter.add(new Vector2(300, 0)), new Vector2(0, 0 - 5), 0.4); //vy = -5
-spawnPlanet(screenCenter.add(new Vector2(323, 0)), new Vector2(0, 1.6 - 5), 0.01);
+function loadPreset(preset)
+{
+    for (let i = 0; i < preset.length; i++)
+    {
+        spawnPlanet(preset[i].spawnPosition, preset[i].spawnVelocity, preset[i].mass, preset[i].radius, preset[i].color)
+    }
+}
 
-spawnPlanet(screenCenter.add(new Vector2(200, 0)), new Vector2(0, 6), 0.2);
-spawnPlanet(screenCenter.add(new Vector2(100, 0)), new Vector2(0, -8), 0.1);
-spawnPlanet(screenCenter, new Vector2(-0.05, 0.05), 50);
+loadPreset(Presets.solarSystem);
 
 main();
 
